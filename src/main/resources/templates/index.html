@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://use.fontawesome.com/0675b71c0b.js"></script>
+
+<style>
+	body{
+		background-image: url('./img/PlanoDeFundo1.jpg');
+	}
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column"><!--Primeira Coluna-->
+                <h2 class="title title-primary">Bem vindo!</h2>
+                     <p class="description">Se você já tem uma conta</p>
+                     <p class="description">Por favor logue abaixo</p>
+                <button id="entrar" class="btn btn-primary" type="submit">Entrar</button>
+            </div>
+          <div class="second-column"><!--Segunda Coluna-->
+             <h2 class="title title-second">Criar Contar</h2>
+             
+         		
+               <form class="form">
+						<input type="text" placeholder="Nome" id="nome">
+                		<input type="text" placeholder="Sobrenome" id="sobrenome">
+                        <input type="text" placeholder="Email" id="email">
+               			<input type="password" placeholder="Senha" id="senha">
+                 		<input type="password" placeholder="ConfirmarSenha" id="confirmarsenha">
+             			<input type="date" placeholder="Idade" id="idade">
+                 		 
+                </form>
+                
+                <button class="btn btn-second" type="submit">Criar</button>
+          </div>   
+        </div><!--First Content--> 
+        
+        <div class="content second-content">            
+            <div class="first-column"><!--Primeira Coluna-->
+                <h2 class="title title-primary">Olá Aluno!</h2>
+                     <p class="description">Se você ainda não tem uma conta</p>
+                     <p class="description">Por favor crie uma</p>
+                <button id="criar" class="btn btn-primary" type="submit" >Criar</button>
+            </div>
+          <div class="second-column"><!--Segunda Coluna-->
+             <h2 class="title title-second" type="submit" >Login</h2>
+                <form class="form">
+                    <input type="Email" placeholder="Email">
+                    <input type="password" placeholder="Senha">
+                </form>
+                <a href="/telaInicial" class="btn btn-second btn-link"  type="submit">Entrar</a>
+          </div>   
+        </div><!--Second Content--> 
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
