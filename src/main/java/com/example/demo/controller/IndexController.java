@@ -40,4 +40,9 @@ public class IndexController {
 	public String Disciplinas() {
 		return "Disciplinas";
 	}
+	
+	@GetMapping("/perfilAluno")
+	public String perfilAluno() {
+		return "perfilAluno";
+	}
 }

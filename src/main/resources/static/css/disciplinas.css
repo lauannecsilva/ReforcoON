@@ -12,3 +12,9 @@
 form-group{
 	margin-top:1%;
 }
+
+.botao{
+	display: flex;
+	justify-content:space-between;
+	width:100%;
+}
