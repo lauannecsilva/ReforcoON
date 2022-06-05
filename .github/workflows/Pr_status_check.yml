@@ -1,0 +1,53 @@
+name: "PR Status Check"
+
+on:
+  pull_request:
+    branches: 
+    - main
+
+jobs:
+  check-build-test:
+    name: "Check build and test"
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: 11
+          architecture: x64
+
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Maven Test
+        run: mvn test
+
+      - run: mkdir coverage-report && cp -r target/site/jacoco/* coverage-report
+
+      - name: Publish Test Report
+        if: ${{ always() }}
+        uses: scacap/action-surefire-report@v1
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Test Coverage Report
+          path: coverage-report
+
+      - name: Create status check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY : ${{ env.GITHUB_REPOSITORY }}
+        run: |
+          BUILD_COMMIT=$(git rev-parse HEAD)
+          curl -X POST \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/check-runs" \
+            -d '{"name":"build", "head_sha": "'"$BUILD_COMMIT"'", "status": "completed", "conclusion": "success" }'
